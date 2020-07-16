@@ -1,0 +1,108 @@
+int MM_Volt_InputA = A0;
+int MM_Volt_InputB = A1;
+int MM_Volt_Value_bitsA = 0;
+float MM_Volt_Value_voltsA= 0;
+float V_ratioA = 0.021505376344086;
+int MM_Volt_Value_bitsB = 0;
+float MM_Volt_Value_voltsB= 0;
+float V_ratioB = 0.021505376344086;
+  
+int res_2k = 6;
+int res_20k = 7;
+int res_470k = 8;      
+int MM_Res_Input = A2;
+int MM_Res_Value_bits = 0;
+float MM_Res_Value_ohms= 0;
+float SupplyVoltage = 675; //3.3V
+float R_ratio = 1;
+float R4 = 2000;
+float R5 = 20000;
+float R6 = 470000;
+
+void setup()
+{
+  pinMode(MM_Volt_InputA, INPUT);
+  pinMode(MM_Volt_InputB, INPUT);
+  pinMode(MM_Res_Input, INPUT);
+  
+ 
+  Serial.begin(9600);
+
+}
+
+void loop()
+{
+  // Read VOLTAGE Ch A
+  MM_Volt_Value_bitsA = analogRead(MM_Volt_InputA);
+  MM_Volt_Value_voltsA = MM_Volt_Value_bitsA*V_ratioA;
+  
+  Serial.print("VOLTAGE (A):");
+  Serial.print(" ");
+  Serial.print("bits: ");
+  Serial.print(MM_Volt_Value_bitsA);
+  Serial.print(" ");
+  Serial.print("volts: ");
+  Serial.print(MM_Volt_Value_voltsA);
+  Serial.println();
+  
+  delay(10); // Delay a little bit to improve simulation performance
+  
+  // Read VOLTAGE Ch B
+  MM_Volt_Value_bitsB = analogRead(MM_Volt_InputB);
+  MM_Volt_Value_voltsB = MM_Volt_Value_bitsB*V_ratioB;
+  
+  Serial.print("VOLTAGE (A):");
+  Serial.print(" ");
+  Serial.print("bits: ");
+  Serial.print(MM_Volt_Value_bitsB);
+  Serial.print(" ");
+  Serial.print("volts: ");
+  Serial.print(MM_Volt_Value_voltsB);
+  Serial.println();
+  
+  delay(10); // Delay a little bit to improve simulation performance
+
+  // Read RESISTANCE (auto Scale)
+  //0-2k escale
+  pinMode(res_2k,OUTPUT);
+  pinMode(res_20k,INPUT);	//High Impedance
+  pinMode(res_470k,INPUT);  //High Impedance   
+  digitalWrite(res_2k,LOW); //Low impedance = GND
+    
+  MM_Res_Value_bits = analogRead(MM_Res_Input);
+  MM_Res_Value_ohms = ((SupplyVoltage-MM_Res_Value_bits)*R4)/MM_Res_Value_bits;  
+  
+  if(MM_Res_Value_ohms>2000)
+  {
+  pinMode(res_2k,INPUT);
+  pinMode(res_20k,OUTPUT);	//High Impedance
+  pinMode(res_470k,INPUT);  //High Impedance
+  digitalWrite(res_20k,LOW); //Low impedance = GND
+    
+  MM_Res_Value_bits = analogRead(MM_Res_Input);
+  MM_Res_Value_ohms = ((SupplyVoltage-MM_Res_Value_bits)*R5)/MM_Res_Value_bits;  
+  }
+  
+  if(MM_Res_Value_ohms>20000)
+  {
+  pinMode(res_2k,INPUT);
+  pinMode(res_20k,INPUT);	//High Impedance
+  pinMode(res_470k,OUTPUT);  //High Impedance
+  digitalWrite(res_470k,LOW); //Low impedance = GND
+    
+  MM_Res_Value_bits = analogRead(MM_Res_Input);
+  MM_Res_Value_ohms = ((SupplyVoltage-MM_Res_Value_bits)*R6)/MM_Res_Value_bits;   
+  }
+  
+  Serial.print("RESISTANCE: ");
+  Serial.print(" ");
+  Serial.print("bits: ");
+  Serial.print(MM_Res_Value_bits);
+  Serial.print(" ");
+  Serial.print("ohms: ");
+  Serial.print(MM_Res_Value_ohms);
+  Serial.println();
+  delay(10); // Delay a little bit to improve simulation performance
+
+
+}
