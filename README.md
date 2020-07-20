@@ -6,14 +6,14 @@ Android application to be developed on MIT inventor.
 Feature Growth Chart
 
 Phase 1:
-- Prototype, Arduino capacities (10bits resolution, max rate to be defined)
+- Prototype, Arduino (10bits resolution, max rate target 50msec)
 - OTG
 - Indicators + datalogger
 - Voltimeter 0-25 V (two channels)
 - Ohmmeter 0-470k + continuity tester
 
 Phase 2:
-- Prototype (10bits resolution, max rate to be defined)
+- Prototype (10bits resolution, max rate target 50msec)
 - OTG
 - Indicators + datalogger
 - Voltimeter 0-25 V (two channels)
@@ -21,7 +21,7 @@ Phase 2:
 - Capacitance meter
 
 Phase 3:
-- Final case (10bits resolution, max rate to be defined)
+- Final pocket case (10bits resolution, max rate target 50msec)
 - OTG
 - Indicators + datalogger
 - Voltimeter 0-25 V (two channels)
@@ -30,7 +30,7 @@ Phase 3:
 - Current meter 0-5V
 
 Phase 4:
-- Prototype (16bits resolution external ADC, max rate to be defined)
+- Prototype (16bits resolution external ADC, max rate target 50msec)
 - OTG
 - Indicators + datalogger
 - Voltimeter 0-25 V (two channels)
