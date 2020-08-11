@@ -1,0 +1,34 @@
+Arduino             Nokia Display
+  3   --------------- RST
+  4   --------------- CE
+  5   --------------- DC
+  6   --------------- DIN
+  7   --------------- CLK
+  3,3V  ------------- 3,3V
+  GND   ------------- GND
+  
+Arduino             Voltimeter
+  A0  --------------- Channel A
+  A1  --------------- Channel B
+
+Arduino             Ohmmeter
+  A3  --------------- Channel A
+  8   --------------- 2k scale
+  9   --------------- 20k scale
+  
+Arduino             Current Sensor
+  5V  --------------- VCC
+  A4  --------------- OUT
+  GND --------------- GND
+
+Arduino             Buttons
+  10  --------------- Mode
+  A5  --------------- Select
+
+Arduino             SD Card
+  2   --------------- CS
+  11  --------------- MOSI
+  12  --------------- SCK
+  13  --------------- MISO
+  5V  --------------- VCC
+  GND --------------- GND
